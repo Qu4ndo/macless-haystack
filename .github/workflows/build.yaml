@@ -40,23 +40,23 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}  
-      - name: Build and push docker development image
-        if: github.ref == 'refs/heads/dev'  
-        uses: docker/build-push-action@v5
-        with:
-          context: ./endpoint
-          platforms: linux/amd64,linux/arm64
-          push: true
-          file: ./endpoint/Dockerfile_dev
-          tags: christld/macless-haystack:latest-dev,christld/macless-haystack:v${{ env.VERSION }}-${{ github.sha }},   
-      - name: Build and push docker development image
-        if: github.ref == 'refs/heads/main'  
-        uses: docker/build-push-action@v5
-        with:
-          context: "{{defaultContext}}:endpoint"
-          platforms: linux/amd64,linux/arm64
-          push: true
-          tags: christld/macless-haystack:latest,christld/macless-haystack:v${{ env.VERSION }},        
+#      - name: Build and push docker development image
+#        if: github.ref == 'refs/heads/dev'  
+#        uses: docker/build-push-action@v5
+#        with:
+#          context: ./endpoint
+#          platforms: linux/amd64,linux/arm64
+#          push: true
+#          file: ./endpoint/Dockerfile_dev
+#          tags: christld/macless-haystack:latest-dev,christld/macless-haystack:v${{ env.VERSION }}-${{ github.sha }},   
+#      - name: Build and push docker development image
+#        if: github.ref == 'refs/heads/main'  
+#        uses: docker/build-push-action@v5
+#        with:
+#          context: "{{defaultContext}}:endpoint"
+#          platforms: linux/amd64,linux/arm64
+#          push: true
+#          tags: christld/macless-haystack:latest,christld/macless-haystack:v${{ env.VERSION }},        
       - name: Install ARM Toolchain
         uses: carlosperate/arm-none-eabi-gcc-action@v1
         with: 
