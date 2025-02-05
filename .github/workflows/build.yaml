@@ -130,7 +130,7 @@ jobs:
           cd firmware/nrf5x/
           make build 
           make clean
-          NRF_MODEL=nrf51 make build 
+          NRF_MODEL=nrf51 BOARD=BOARD_ALIEXPRESS_NO_XTAL make build 
       - name: Build ESP32 firmware
         run: |
           pio run -d firmware/ESP32/
