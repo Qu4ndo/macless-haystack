@@ -78,16 +78,7 @@ jobs:
         with:
           name: webapplication
           path: ./macless_haystack/build/webapplication
-      - name: Android Build
-        working-directory: ./macless_haystack
-        run: |
-          flutter build apk  --release
-          mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/android-application.apk
-      - name: Upload Android Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: android-application
-          path: ./macless_haystack/build/app/outputs/flutter-apk/android-application.apk
+
       - uses: actions/cache@v3
         with:
           path: |
@@ -105,19 +96,7 @@ jobs:
           make build 
           make clean
           NRF_MODEL=nrf51 BOARD=BOARD_ALIEXPRESS_NO_XTAL make build 
-      - name: Build ESP32 firmware
-        run: |
-          pio run -d firmware/ESP32/
-          cd firmware/ESP32/.pio/build/esp32dev/
-          zip -r esp32-firmware.zip firmware.bin partitions.bin bootloader.bin
-      - name: Upload firmware
-        uses: actions/upload-artifact@v4
-        with:
-          name: esp32-firmware
-          path: |
-            firmware/ESP32/.pio/build/esp32dev/firmware.bin
-            firmware/ESP32/.pio/build/esp32dev/partitions.bin
-            firmware/ESP32/.pio/build/esp32dev/bootloader.bin     
+  
       - name: Delete old drafts
         uses: hugo19941994/delete-draft-releases@v1.0.0
         env:
